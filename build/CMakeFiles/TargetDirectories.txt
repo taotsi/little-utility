@@ -1,5 +1,0 @@
-/home/bot/Projects/weitao/little-utility/build/CMakeFiles/rebuild_cache.dir
-/home/bot/Projects/weitao/little-utility/build/CMakeFiles/edit_cache.dir
-/home/bot/Projects/weitao/little-utility/build/src/CMakeFiles/rebuild_cache.dir
-/home/bot/Projects/weitao/little-utility/build/src/CMakeFiles/edit_cache.dir
-/home/bot/Projects/weitao/little-utility/build/src/CMakeFiles/little-utility.dir
