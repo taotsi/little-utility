@@ -17,15 +17,15 @@ namespace taotsi{
 class Timer{
 public:
     Timer()
-        : start_{std::chrono::system_clock::time_point::min()}{
+        : start_{std::chrono::high_resolution_clock::time_point::min()}{
         id_ = ++timer_count();
     }
     void Clear(){
-        start_ = std::chrono::system_clock::time_point::min();
+        start_ = std::chrono::high_resolution_clock::time_point::min();
     }
     bool IsStarted() const{
         return(start_.time_since_epoch() !=
-            std::chrono::system_clock::duration(0));
+            std::chrono::high_resolution_clock::duration(0));
     }
     void tStart(const char* file, int line, const char* func){
         if(!is_silent()){
@@ -36,7 +36,7 @@ public:
                 std::cout << ss.str();
             }
         }
-        start_ = std::chrono::system_clock::now();
+        start_ = std::chrono::high_resolution_clock::now();
     }
     unsigned int tPutNow(const char* file, int line, const char* func){
         auto t = GetUs();
@@ -56,8 +56,8 @@ public:
     }
     unsigned int GetUs(){
         if(IsStarted()){
-            std::chrono::system_clock::duration diff
-                = std::chrono::system_clock::now() - start_;
+            std::chrono::high_resolution_clock::duration diff
+                = std::chrono::high_resolution_clock::now() - start_;
             return static_cast<unsigned int>(
                 std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
         }else{
@@ -83,7 +83,7 @@ public:
         is_silent() = false;
     }
 private:
-    std::chrono::system_clock::time_point start_;
+    std::chrono::high_resolution_clock::time_point start_;
     int id_;
     static int& timer_count(){
         static int count = 0;
