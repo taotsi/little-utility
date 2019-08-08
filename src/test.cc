@@ -1,14 +1,17 @@
+#include <thread>
+#include <chrono>
 #include "utility.hh"
 
 using namespace taotsi;
+using namespace std::chrono_literals;
 
 void TestMsg();
 void TestTimer();
 
-
 int main(int argc, char** argv)
 {
-  TestMsg();
+  // TestMsg();
+  TestTimer();
   return 0;
 }
 
@@ -20,5 +23,8 @@ void TestMsg()
 }
 void TestTimer()
 {
-
+  Timer t;
+  t.tStart();
+  std::this_thread::sleep_for(42ms);
+  t.tPutNow();
 }

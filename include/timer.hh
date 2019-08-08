@@ -13,6 +13,7 @@
 
 namespace taotsi{
 
+// resolution: ms
 class Timer{
 public:
     Timer()
@@ -44,7 +45,7 @@ public:
             if(!is_plain_text()){
                 ss << "\033[0;44mTimer(" << id_ << ")\033[0m" << " ended,   "
                     << file << "(" << line << "), " << func << "\n"
-                    << "> " << t << " us passed\n";
+                    << "> " << t << " ms passed\n";
                 std::cout << ss.str();
             }else{
                 ss << t << "\n";
@@ -58,7 +59,7 @@ public:
             std::chrono::system_clock::duration diff
                 = std::chrono::system_clock::now() - start_;
             return static_cast<unsigned int>(
-                std::chrono::duration_cast<std::chrono::microseconds>(diff).count());
+                std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
         }else{
             if(!is_silent()){
                 if(is_plain_text()){
@@ -97,7 +98,7 @@ private:
         return is_silent_;
     }
 };
-#define tStart() tStart(__FILE__, __LINE__, __FUNCTION__)
-#define tPutNow() tPutNow(__FILE__, __LINE__, __FUNCTION__)
+#define tStart() tStart(__FILENAME__, __LINE__, __FUNCTION__)
+#define tPutNow() tPutNow(__FILENAME__, __LINE__, __FUNCTION__)
 
 } // namespace droneworld
