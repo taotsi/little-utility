@@ -17,6 +17,7 @@ void TestMsg()
 {
   int x = 42;
   tval(x);
+  tmark();
 }
 void TestTimer()
 {

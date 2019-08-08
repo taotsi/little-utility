@@ -9,6 +9,7 @@
 #include <cassert>
 #include <numeric>
 #include <cmath>
+#include "macros.hh"
 
 namespace taotsi{
 
@@ -181,12 +182,12 @@ private:
         return is_locked_silent_;
     }
 };
-#define tmark() Msg::tmark(__FILE__, __LINE__, __FUNCTION__)
-#define tmsg(...) Msg::tmsg(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define terr(...) Msg::terr(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define twarn(...) Msg::twarn(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define ttrap(...) Msg::ttrap(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define tpause(...) Msg::tpause(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define tmark() Msg::tmark(__FILENAME__, __LINE__, __FUNCTION__)
+#define tmsg(...) Msg::tmsg(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define terr(...) Msg::terr(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define twarn(...) Msg::twarn(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define ttrap(...) Msg::ttrap(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define tpause(...) Msg::tpause(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define ti0(...) Msg::ti0(__VA_ARGS__)
 #define ti1(...) Msg::ti1(__VA_ARGS__)
 #define ti2(...) Msg::ti2(__VA_ARGS__)
