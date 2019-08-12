@@ -9,6 +9,7 @@
 #include <cassert>
 #include <numeric>
 #include <cmath>
+#include <vector>
 #include "macros.hh"
 
 namespace taotsi{
@@ -43,6 +44,20 @@ public:
       {
         std::stringstream ss;
         ss << "\033[0;35m" << val_name << "\033[0m = " << val;
+        core(ss);
+      }
+    }
+    template<typename T>
+    static void tval(const char* val_name, std::vector<T> &vals)
+    {
+      if(!is_silent())
+      {
+        std::stringstream ss;
+        ss << "\033[0;35m" << val_name << "\033[0m = \n";
+        for(auto &it : vals)
+        {
+            ss << it << "\n";
+        }
         core(ss);
       }
     }

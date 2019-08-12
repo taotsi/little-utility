@@ -10,16 +10,18 @@ void TestTimer();
 
 int main(int argc, char** argv)
 {
-  // TestMsg();
-  TestTimer();
+  TestMsg();
+  // TestTimer();
   return 0;
 }
 
 void TestMsg()
 {
-  int x = 42;
-  tval(x);
-  tmark();
+  // int x = 42;
+  // tval(x);
+  // tmark();
+  std::vector<int> vec{1, 2, 3, 4, 5};
+  tval(vec);
 }
 void TestTimer()
 {
