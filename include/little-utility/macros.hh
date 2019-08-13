@@ -8,6 +8,12 @@
   T& operator=(T&&) = default;\
   ~T() = default;
 
+#define DELETE_COPY_MOVE(T)\
+  T(const T&) = delete;\
+  T(T&&) = delete;\
+  T& operator=(const T&) = delete;\
+  T& operator=(T&&) = delete;
+
 #define __FILENAME__                                                       \
   (__builtin_strrchr(__FILE__, '/') ? __builtin_strrchr(__FILE__, '/') + 1 \
                                     : __FILE__)

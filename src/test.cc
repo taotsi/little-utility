@@ -13,8 +13,9 @@ void TestCounter();
 int main(int argc, char** argv)
 {
   // TestMsg();
-  TestTimer();
+  // TestTimer();
   TestCounter();
+
   return 0;
 }
 
@@ -36,14 +37,12 @@ void TestTimer()
 
 void TestCounter()
 {
-  auto c1 = Counter::NewCounter();
-  for (size_t i = 0; i < 1234567; i++)
-  {
-    c1.Once();
-  }
-  auto c2 = Counter::NewCounter();
   for (size_t i = 0; i < 50; i++)
   {
-    c2.Once();
+    COUNT_HERE();
+  }
+  for (size_t i = 0; i < 10000; i++)
+  {
+    COUNT_HERE();
   }
 }
