@@ -11,6 +11,18 @@ namespace taotsi{
 
 class Counter
 {
+public:
+  static void ShowCounts()
+  {
+    std::stringstream ss;
+    ss.imbue(std::locale(""));
+    ss << "\033[0;44mCOUNTER:\033[0m\n";
+    for(auto &it : counters_)
+    {
+      ss << "  " << it.first << ":\t" << it.second << " times\n";
+    }
+    std::cout << ss.str();
+  }
 private:
   friend void CountHere(const char* file, int line);
   Counter() {}
@@ -40,8 +52,10 @@ private:
     }
   }
 
-  std::unordered_map<std::string, unsigned long long> counters_;
+  static std::unordered_map<std::string, unsigned long long> counters_;
 };
+
+std::unordered_map<std::string, unsigned long long> Counter::counters_ = {};
 
 void CountHere(const char* file, int line)
 {
@@ -50,6 +64,7 @@ void CountHere(const char* file, int line)
 }
 
 #define COUNT_HERE() CountHere(__FILENAME__, __LINE__)
+#define SHOW_COUNTS() Counter::ShowCounts()
 }
 
 #endif // COUNTER_HH

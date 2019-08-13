@@ -41,6 +41,7 @@ void TestCounter()
   {
     COUNT_HERE();
   }
+  SHOW_COUNTS();
   for (size_t i = 0; i < 10000; i++)
   {
     COUNT_HERE();
