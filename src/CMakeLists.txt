@@ -1,4 +1,4 @@
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/include/little-utility)
 
 add_executable(little-utility test.cc)
 
