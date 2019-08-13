@@ -1,5 +1,6 @@
 #include <thread>
 #include <chrono>
+#include <limits>
 #include "utility.hh"
 
 using namespace taotsi;
@@ -12,7 +13,7 @@ void TestCounter();
 int main(int argc, char** argv)
 {
   // TestMsg();
-  // TestTimer();
+  TestTimer();
   TestCounter();
   return 0;
 }
@@ -29,18 +30,18 @@ void TestTimer()
 {
   Timer t;
   t.tStart();
-  std::this_thread::sleep_for(42ms);
+  std::this_thread::sleep_for(1234ms);
   t.tPutNow();
 }
 
 void TestCounter()
 {
-  Counter c1;
-  for (size_t i = 0; i < 100; i++)
+  auto c1 = Counter::NewCounter();
+  for (size_t i = 0; i < 1234567; i++)
   {
     c1.Once();
   }
-  Counter c2;
+  auto c2 = Counter::NewCounter();
   for (size_t i = 0; i < 50; i++)
   {
     c2.Once();

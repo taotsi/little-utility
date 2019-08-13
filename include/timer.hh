@@ -38,10 +38,11 @@ public:
         }
         start_ = std::chrono::high_resolution_clock::now();
     }
-    unsigned int tPutNow(const char* file, int line, const char* func){
+    unsigned long long tPutNow(const char* file, int line, const char* func){
         auto t = GetUs();
         if(!is_silent()){
             std::stringstream ss;
+            ss.imbue(std::locale(""));
             if(!is_plain_text()){
                 ss << "\033[0;44mTimer(" << id_ << ")\033[0m" << " ended,   "
                     << file << "(" << line << "), " << func << "\n"
@@ -54,11 +55,11 @@ public:
         }
         return t;
     }
-    unsigned int GetUs(){
+    unsigned long long GetUs(){
         if(IsStarted()){
             std::chrono::high_resolution_clock::duration diff
                 = std::chrono::high_resolution_clock::now() - start_;
-            return static_cast<unsigned int>(
+            return static_cast<unsigned long long>(
                 std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
         }else{
             if(!is_silent()){
