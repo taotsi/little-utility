@@ -4,5 +4,6 @@
 #include "macros.hh"
 #include "msg.hh"
 #include "timer.hh"
+#include "counter.hh"
 
 #endif // UTILITY_HH

@@ -7,11 +7,13 @@ using namespace std::chrono_literals;
 
 void TestMsg();
 void TestTimer();
+void TestCounter();
 
 int main(int argc, char** argv)
 {
-  TestMsg();
+  // TestMsg();
   // TestTimer();
+  TestCounter();
   return 0;
 }
 
@@ -29,4 +31,18 @@ void TestTimer()
   t.tStart();
   std::this_thread::sleep_for(42ms);
   t.tPutNow();
+}
+
+void TestCounter()
+{
+  Counter c1;
+  for (size_t i = 0; i < 100; i++)
+  {
+    c1.Once();
+  }
+  Counter c2;
+  for (size_t i = 0; i < 50; i++)
+  {
+    c2.Once();
+  }
 }
