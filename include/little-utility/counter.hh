@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <string>
 #include <sstream>
+#include <iostream>
 #include "macros.hh"
 
 namespace taotsi{
@@ -12,32 +13,15 @@ namespace taotsi{
 class Counter
 {
 public:
-  static void ShowCounts()
+  static Counter& instance()
   {
-    std::stringstream ss;
-    ss.imbue(std::locale(""));
-    ss << "\033[0;44mCOUNTER:\033[0m\n";
-    for(auto &it : counters_)
-    {
-      ss << "  " << it.first << ":\t" << it.second << " times\n";
-    }
-    std::cout << ss.str();
+    static Counter counter;
+    return counter;
   }
-private:
-  friend void CountHere(const char* file, int line);
-  Counter() {}
   ~Counter()
   {
-    std::stringstream ss;
-    ss.imbue(std::locale(""));
-    ss << "\033[0;44mCOUNTER:\033[0m\n";
-    for(auto &it : counters_)
-    {
-      ss << "  " << it.first << ":\t" << it.second << " times\n";
-    }
-    std::cout << ss.str();
+    ShowCounts();
   }
-  // DEFAULT_SPECIAL_FUNCTIONS(Counter);
   void HereOnce(const char* file, int line)
   {
     std::stringstream ss;
@@ -51,20 +35,26 @@ private:
       counters_[ss.str()] = 1;
     }
   }
+  void ShowCounts()
+  {
+    std::stringstream ss;
+    ss.imbue(std::locale(""));
+    ss << "\033[0;44mCOUNTER:\033[0m\n";
+    for(auto &it : counters_)
+    {
+      ss << "  " << it.first << ":\t" << it.second << " times\n";
+    }
+    std::cout << ss.str();
+  }
+private:
+  Counter() {}
 
-  static std::unordered_map<std::string, unsigned long long> counters_;
+  std::unordered_map<std::string, unsigned long long> counters_{};
 };
 
-std::unordered_map<std::string, unsigned long long> Counter::counters_ = {};
 
-void CountHere(const char* file, int line)
-{
-  static Counter c;
-  c.HereOnce(file, line);
-}
-
-#define COUNT_HERE() CountHere(__FILENAME__, __LINE__)
-#define SHOW_COUNTS() Counter::ShowCounts()
+#define COUNT_HERE() Counter::instance().HereOnce(__FILENAME__, __LINE__)
+#define SHOW_COUNTS() Counter::instance().ShowCounts()
 }
 
 #endif // COUNTER_HH
