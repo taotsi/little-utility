@@ -1,6 +1,7 @@
 #include <thread>
 #include <chrono>
 #include <limits>
+#include <cstdlib>
 #include "utility.hh"
 
 using namespace taotsi;
@@ -9,12 +10,14 @@ using namespace std::chrono_literals;
 void TestMsg();
 void TestTimer();
 void TestCounter();
+void TestRand();
 
 int main(int argc, char** argv)
 {
   // TestMsg();
   // TestTimer();
-  TestCounter();
+  // TestCounter();
+  TestRand();
 
   return 0;
 }
@@ -46,4 +49,13 @@ void TestCounter()
   {
     COUNT_HERE();
   }
+}
+
+void TestRand()
+{
+  // auto di = Rand::IntRandomDice(0, 99);
+  // for (size_t i = 0; i < 20; i++)
+  // {
+  //   tval(di());
+  // }
 }

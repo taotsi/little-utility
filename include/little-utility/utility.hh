@@ -5,5 +5,6 @@
 #include "msg.hh"
 #include "timer.hh"
 #include "counter.hh"
+#include "rand.hh"
 
 #endif // UTILITY_HH
