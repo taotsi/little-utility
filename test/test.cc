@@ -3,26 +3,21 @@
 #include <limits>
 #include <cstdlib>
 #include "utility.hh"
+#include "catch.hpp"
 
 using namespace taotsi;
 using namespace std::chrono_literals;
+
+TEST_CASE("test")
+{
+  REQUIRE(1 == 1);
+}
 
 void TestMsg();
 void TestTimer();
 void TestCounter();
 void test_rand();
 void test_filter();
-
-int main(int argc, char** argv)
-{
-  // TestMsg();
-  // TestTimer();
-  // TestCounter();
-  test_rand();
-  // test_filter();
-
-  return 0;
-}
 
 void TestMsg()
 {
