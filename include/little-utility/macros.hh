@@ -1,6 +1,8 @@
 #ifndef MACROS_HH
 #define MACROS_HH
 
+#include <cstring>
+
 #define DEFAULT_SPECIAL_FUNCTIONS(T)\
   T(const T&) = default;\
   T(T&&) = default;\

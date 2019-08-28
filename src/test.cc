@@ -70,8 +70,13 @@ void TestRand()
 void test_filter()
 {
   ButterWorth bw{10.0, 100.0};
-  for(double w=0; w<200; w+=0.1)
+  for(double w=0; w<200; w+=1)
   {
     std::cout << bw(w) << "\n";
+  }
+  Gauss gs{10, 100};
+  for(double w=0; w<200; w+=1)
+  {
+    std::cout << gs(w) << "\n";
   }
 }
