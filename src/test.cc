@@ -53,9 +53,15 @@ void TestCounter()
 
 void TestRand()
 {
-  // auto di = Rand::IntRandomDice(0, 99);
-  // for (size_t i = 0; i < 20; i++)
-  // {
-  //   tval(di());
-  // }
+  auto di = Rand::int_random_dice(0, 99);
+  for (size_t i = 0; i < 20; i++)
+  {
+    tval(di());
+  }
+  auto dp = Rand::probability_dice();
+  for (size_t i = 0; i < 20; i++)
+  {
+    tval(dp());
+  }
+  
 }

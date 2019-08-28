@@ -10,7 +10,7 @@ namespace taotsi
 class Rand
 {
 public:
-  static auto RealRandomDice()
+  static auto probability_dice()
   {
     double begin = 0.0, end = 1.0;
     std::random_device rd;
@@ -20,7 +20,7 @@ public:
     return dice;
   }
 
-  static auto IntRandomDice(int begin, int end)
+  static auto int_random_dice(int begin, int end)
   {
     std::random_device rd;
     std::mt19937 mt{rd()};
