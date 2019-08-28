@@ -12,8 +12,8 @@ TEST_CASE("single filter")
 {
   SECTION("butterwort low path")
   {
-    ButterWorthHP bl{10.0, 100.0};
-    REQUIRE(bl(45.0) == 1.0);
+    ButterWorthHP bl{100.0};
+    REQUIRE(bl(50.0) == 1.0);
     REQUIRE(bl(100.0) - 0.707 < 0.1);
   }
 }

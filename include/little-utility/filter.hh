@@ -32,19 +32,19 @@ protected:
 class ButterWorthHP : public Filter
 {
 public:
-  ButterWorthHP(double wcl, double wch, double amp = 1.0)
-    : wcl_{wcl}, wch_{wch}, amp_{amp}
+  ButterWorthHP(double wc, double amp = 1.0)
+    : wc_{wc}, amp_{amp}
   {
-    std::function<double(double)> filter = [this](double w)
+    std::function<double(double)> filter = [self = this](double w)
     {
-      return 1.0 / (sqrt(1.0 + pow(pow(2.0, w - this->wch_), 2.0)));
+      return self->amp_ / (sqrt(1.0 + pow(pow(2.0, w - self->wc_), 2.0)));
     };
     filters_.push_back(filter);
   };
   DEFAULT_SPECIAL_FUNCTIONS(ButterWorthHP);
 
 private:
-  double wcl_, wch_, amp_;
+  double wc_, amp_;
 };
 
 class Gauss
