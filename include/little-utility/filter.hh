@@ -4,6 +4,9 @@
 #include <cmath>
 #include "macros.hh"
 
+namespace taotsi
+{
+
 class ButterWorth
 {
 public:
@@ -48,5 +51,6 @@ private:
   double mean_, var_;
 };
 
+}
 
 #endif // FILTER_HH

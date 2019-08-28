@@ -16,6 +16,7 @@
   T& operator=(const T&) = delete;\
   T& operator=(T&&) = delete;
 
+#ifndef __FILENAME__
 #ifdef __linux__
   #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 #elif _WIN32
@@ -23,6 +24,6 @@
 #else
   #define __FILENAME__ __FILE__
 #endif
-
+#endif
 
 #endif // MACROS_HH
