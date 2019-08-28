@@ -25,6 +25,13 @@ public:
     }
     return result;
   }
+  friend Filter operator*(const Filter &lhs, const Filter &rhs)
+  {
+    Filter f;
+    f.filters_.insert(f.filters_.end(), lhs.filters_.begin(), lhs.filters_.end());
+    f.filters_.insert(f.filters_.end(), rhs.filters_.begin(), rhs.filters_.end());
+    return f;
+  }
 protected:
   std::vector<std::function<double(double)>> filters_;
 };
@@ -35,9 +42,9 @@ public:
   ButterWorthHP(double wc, double amp = 1.0)
     : wc_{wc}, amp_{amp}
   {
-    std::function<double(double)> filter = [self = this](double w)
+    std::function<double(double)> filter = [amp = amp_, wc = wc_](double w)
     {
-      return self->amp_ / (sqrt(1.0 + pow(pow(2.0, w - self->wc_), 2.0)));
+      return amp / (sqrt(1.0 + pow(pow(2.0, w - wc), 2.0)));
     };
     filters_.push_back(filter);
   };
@@ -45,21 +52,6 @@ public:
 
 private:
   double wc_, amp_;
-};
-
-class Gauss
-{
-public:
-  Gauss(double wcl, double wch, double amp = 1.0)
-    : wcl_{wcl}, wch_{wch}, amp_{amp}
-  {
-    mean_ = (wch_ + wcl_) / 2.0;
-    var_ = wch_ - mean_;
-  }
-
-private:
-  double wcl_, wch_, amp_;
-  double mean_, var_;
 };
 
 }

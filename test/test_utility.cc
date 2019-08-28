@@ -10,11 +10,22 @@ using namespace std::chrono_literals;
 
 TEST_CASE("single filter")
 {
+  ButterWorthHP bh{100.0};
   SECTION("butterwort low path")
   {
-    ButterWorthHP bl{100.0};
-    REQUIRE(bl(50.0) == 1.0);
-    REQUIRE(bl(100.0) - 0.707 < 0.1);
+    REQUIRE(bh(50.0) == 1.0);
+    REQUIRE(abs(bh(100.0) - 0.707) < 0.1);
+  }
+  SECTION("filter mutiples")
+  {
+    ButterWorthHP bh2{100.0};
+    auto bh3 = bh * bh2;
+    REQUIRE(abs(bh3(100.0) - 0.707*0.707) < 0.001);
+    REQUIRE(bh3(50.0) == 1.0);
+
+    ButterWorthHP bh4{100.0};
+    auto bh5 = bh3 * bh4;
+    REQUIRE(abs(bh5(100.0) - 0.707*0.707*0.707) < 0.001);
   }
 }
 
