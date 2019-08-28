@@ -28,6 +28,16 @@ public:
     auto dice = std::bind(dist, mt);
     return dice;
   }
+  static bool die_once(double p)
+  {
+    assert(p >= 0 && p <=1);
+    auto dice = probability_dice();
+    if(dice() <= p)
+    {
+      return true;
+    }
+    return false;
+  }
 private:
 
 };

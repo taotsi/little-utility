@@ -10,7 +10,7 @@ using namespace std::chrono_literals;
 void TestMsg();
 void TestTimer();
 void TestCounter();
-void TestRand();
+void test_rand();
 void test_filter();
 
 int main(int argc, char** argv)
@@ -18,8 +18,8 @@ int main(int argc, char** argv)
   // TestMsg();
   // TestTimer();
   // TestCounter();
-  // TestRand();
-  test_filter();
+  test_rand();
+  // test_filter();
 
   return 0;
 }
@@ -53,18 +53,27 @@ void TestCounter()
   }
 }
 
-void TestRand()
+void test_rand()
 {
-  auto di = Rand::int_random_dice(0, 99);
-  for (size_t i = 0; i < 20; i++)
+  // auto di = Rand::int_random_dice(0, 99);
+  // for (size_t i = 0; i < 20; i++)
+  // {
+  //   tval(di());
+  // }
+  // auto dp = Rand::probability_dice();
+  // for (size_t i = 0; i < 20; i++)
+  // {
+  //   tval(dp());
+  // }
+  int count = 0;
+  for (size_t i = 0; i < 10000; i++)
   {
-    tval(di());
+    if(Rand::die_once(0.5))
+    {
+      count++;
+    }
   }
-  auto dp = Rand::probability_dice();
-  for (size_t i = 0; i < 20; i++)
-  {
-    tval(dp());
-  }
+  tval(count);
 }
 
 void test_filter()
