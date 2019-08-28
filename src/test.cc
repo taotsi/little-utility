@@ -11,13 +11,15 @@ void TestMsg();
 void TestTimer();
 void TestCounter();
 void TestRand();
+void test_filter();
 
 int main(int argc, char** argv)
 {
   // TestMsg();
   // TestTimer();
   // TestCounter();
-  TestRand();
+  // TestRand();
+  test_filter();
 
   return 0;
 }
@@ -63,5 +65,13 @@ void TestRand()
   {
     tval(dp());
   }
-  
+}
+
+void test_filter()
+{
+  ButterWorth bw{10.0, 100.0};
+  for(double w=0; w<200; w+=0.1)
+  {
+    std::cout << bw(w) << "\n";
+  }
 }
