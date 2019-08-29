@@ -42,7 +42,7 @@ public:
   ButterWorthHP(double wc, double amp = 1.0)
     : wc_{wc}, amp_{amp}
   {
-    std::function<double(double)> filter = [amp = amp_, wc = wc_](double w)
+    auto filter = [amp = amp_, wc = wc_](double w)
     {
       return amp / (sqrt(1.0 + pow(pow(2.0, wc - w), 2.0)));
     };
@@ -60,7 +60,7 @@ public:
   ButterWorthLP(double wc, double amp = 1.0)
     : wc_{wc}, amp_{amp}
   {
-    std::function<double(double)> filter = [amp = amp_, wc = wc_](double w)
+    auto filter = [amp = amp_, wc = wc_](double w)
     {
       return amp / (sqrt(1.0 + pow(pow(2.0, w - wc), 2.0)));
     };
@@ -69,6 +69,25 @@ public:
   DEFAULT_SPECIAL_FUNCTIONS(ButterWorthLP);
 private:
   double wc_, amp_;
+};
+
+class Gauss : public Filter
+{
+public:
+  Gauss(double wcl, double wch, double amp = 1.0)
+    : amp_{amp}
+  {
+    mean_ = (wcl + wch) / 2.0;
+    var_ = mean_ - wcl;
+    auto filter = [mean = mean_, var = var_, amp = amp_](double w)
+    {
+      return amp * exp(-pow(w - mean, 2.0) / (2.0*pow(var, 2.0)));
+    };
+    filters_.push_back(filter);
+  }
+  DEFAULT_SPECIAL_FUNCTIONS(Gauss);
+private:
+  double mean_, var_, amp_;
 };
 
 }

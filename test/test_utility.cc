@@ -8,7 +8,7 @@
 using namespace taotsi;
 using namespace std::chrono_literals;
 
-TEST_CASE("single filter")
+TEST_CASE("butterworth filter")
 {
   ButterWorthLP bl{100.0};
   SECTION("butterwort low pass")
@@ -45,6 +45,14 @@ TEST_CASE("single filter")
     REQUIRE(abs(bb(0.0)) < 0.001);
     REQUIRE(abs(bb(200.0)) < 0.001);
   }
+}
+
+TEST_CASE("gauss band pass")
+{
+  Gauss gs{10.0, 100.0};
+  REQUIRE(abs(gs(55.0) - 1.0) < 0.001);
+  REQUIRE(gs(10.0) == gs(100.0));
+  REQUIRE(abs(gs(10.0) - exp(-0.5)) < 0.001);
 }
 
 // void TestMsg()
