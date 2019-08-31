@@ -26,4 +26,6 @@
 #endif
 #endif
 
+#define VAR_NAME(var) static_cast<std::string>(#var)
+
 #endif // MACROS_HH

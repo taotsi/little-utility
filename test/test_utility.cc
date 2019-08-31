@@ -29,6 +29,12 @@ TEST_CASE("single filter")
   }
 }
 
+TEST_CASE("macros")
+{
+  int some_var = 42;
+  REQUIRE(VAR_NAME(some_var) == std::string("some_var"));
+}
+
 // void TestMsg()
 // {
 //   // int x = 42;
