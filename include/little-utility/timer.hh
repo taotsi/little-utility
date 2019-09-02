@@ -46,7 +46,7 @@ public:
             if(!is_plain_text()){
                 ss << "\033[0;44mTimer(" << id_ << ")\033[0m" << " ended,   "
                     << file << "(" << line << "), " << func << "\n"
-                    << "> " << t << " ms passed\n";
+                    << "> " << t << " us passed\n";
                 std::cout << ss.str();
             }else{
                 ss << t << "\n";
@@ -60,7 +60,7 @@ public:
             std::chrono::high_resolution_clock::duration diff
                 = std::chrono::high_resolution_clock::now() - start_;
             return static_cast<unsigned long long>(
-                std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
+                std::chrono::duration_cast<std::chrono::microseconds>(diff).count());
         }else{
             if(!is_silent()){
                 if(is_plain_text()){

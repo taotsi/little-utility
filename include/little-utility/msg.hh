@@ -16,24 +16,24 @@ namespace taotsi{
 
 class Msg{
 public:
-    static void tmark(const char* file, int line, const char* func)
+    static void tmark(const char* file, int line)
     {
         if(!is_silent())
         {
             std::stringstream ss;
             ss << "\033[0;45mMARK\033[0m"
-                << " " << file << "(" << line << "), " << func << "\n";
+                << " " << file << "(" << line << "): ";
             std::cout << ss.str();
         }
     }
     template<typename ...Args>
-    static void tmsg(const char* file, int line, const char* func, Args... args)
+    static void tmsg(const char* file, int line, Args... args)
     {
         if(!is_silent())
         {
             std::stringstream ss;
             ss << "\033[0;45mMESSAGE\033[0m"
-                << " " << file << "(" << line << "), " << func << "\n";
+                << " " << file << "(" << line << "): ";
             core(ss, args...);
         }
     }
@@ -62,43 +62,43 @@ public:
       }
     }
     template<typename ...Args>
-    static void terr(const char* file, int line, const char* func, Args... args)
+    static void terr(const char* file, int line, Args... args)
     {
         if(!is_silent())
         {
             std::stringstream ss;
             ss << "\033[0;41mERROR\033[0m"
-                << " " << file << "(" << line << "), " << func << "\n";
+                << " " << file << "(" << line << "): ";
             core(ss, args...);
         }
     }
     template<typename ...Args>
-    static void twarn(const char* file, int line, const char* func, Args... args)
+    static void twarn(const char* file, int line, Args... args)
     {
         if(!is_silent())
         {
             std::stringstream ss;
             ss << "\033[0;43mWARNING\033[0m"
-                << " " << file << "(" << line << "), " << func << "\n";
+                << " " << file << "(" << line << "): ";
             core(ss, args...);
         }
     }
     template<typename ...Args>
-    static void ttrap(const char* file, int line, const char* func, Args... args)
+    static void ttrap(const char* file, int line, Args... args)
     {
         std::stringstream ss;
         ss << "\033[0;41mTRAP\033[0m"
-            << " " << file << "(" << line << "), " << func << "\n";
+            << " " << file << "(" << line << "): ";
         core(ss, args...);
         assert(false);
     }
-    static void tpause(const char* file, int line, const char* func)
+    static void tpause(const char* file, int line)
     {
         if(!is_silent())
         {
             std::stringstream ss;
             ss << "\033[0;43mPAUSE\033[0m"
-                << " " << file << "(" << line << "), " << func << "\n";
+                << " " << file << "(" << line << "): ";
             std::cout << ss.str();
             char in;
             std::cin >> in;
@@ -197,12 +197,12 @@ private:
         return is_locked_silent_;
     }
 };
-#define tmark() Msg::tmark(__FILENAME__, __LINE__, __FUNCTION__)
-#define tmsg(...) Msg::tmsg(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define terr(...) Msg::terr(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define twarn(...) Msg::twarn(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define ttrap(...) Msg::ttrap(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define tpause(...) Msg::tpause(__FILENAME__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define tmark() Msg::tmark(__FILENAME__, __LINE__)
+#define tmsg(...) Msg::tmsg(__FILENAME__, __LINE__, __VA_ARGS__)
+#define terr(...) Msg::terr(__FILENAME__, __LINE__, __VA_ARGS__)
+#define twarn(...) Msg::twarn(__FILENAME__, __LINE__, __VA_ARGS__)
+#define ttrap(...) Msg::ttrap(__FILENAME__, __LINE__, __VA_ARGS__)
+#define tpause(...) Msg::tpause(__FILENAME__, __LINE__, __VA_ARGS__)
 #define ti0(...) Msg::ti0(__VA_ARGS__)
 #define ti1(...) Msg::ti1(__VA_ARGS__)
 #define ti2(...) Msg::ti2(__VA_ARGS__)
