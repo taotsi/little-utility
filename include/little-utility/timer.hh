@@ -1,7 +1,6 @@
 #pragma once
 #include <thread>
 #include <stdexcept>
-#include <experimental/filesystem>
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -13,7 +12,6 @@
 
 namespace taotsi{
 
-// resolution: ms
 class Timer{
 public:
     Timer()
