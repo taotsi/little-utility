@@ -61,6 +61,28 @@ TEST_CASE("macros")
   REQUIRE(VAR_NAME(some_var) == std::string("some_var"));
 }
 
+TEST_CASE("counter")
+{
+  for (size_t i = 0; i < 1000; i++)
+  {
+    tCountOnce();
+  }
+  for (size_t i = 0; i < 1000; i++)
+  {
+    tCount(i+1);
+  }
+}
+
+TEST_CASE("timer")
+{
+  Timer t;
+  t.tStart();
+  for (size_t i = 0; i < 9999; i++)
+  {
+    int x = i*i*i;
+  }
+  t.tPutNow();
+}
 // void TestMsg()
 // {
 //   // int x = 42;
@@ -77,18 +99,6 @@ TEST_CASE("macros")
 //   t.tPutNow();
 // }
 
-// void TestCounter()
-// {
-//   for (size_t i = 0; i < 50; i++)
-//   {
-//     COUNT_HERE();
-//   }
-//   SHOW_COUNTS();
-//   for (size_t i = 0; i < 10000; i++)
-//   {
-//     COUNT_HERE();
-//   }
-// }
 
 // void test_rand()
 // {
