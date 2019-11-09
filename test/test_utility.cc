@@ -8,53 +8,6 @@
 using namespace taotsi;
 using namespace std::chrono_literals;
 
-TEST_CASE("butterworth filter")
-{
-  ButterWorthLP bl{100.0};
-  SECTION("butterwort low pass")
-  {
-    REQUIRE(abs(bl(200.0)) < 0.001);
-    REQUIRE(abs(bl(50.0) - 1.0) < 0.001);
-    REQUIRE(abs(bl(100.0) - 0.707) < 0.001);
-  }
-  ButterWorthHP bh{10.0};
-  SECTION("butterworth high pass")
-  {
-    REQUIRE(abs(bh(0.0)) < 0.001);
-    REQUIRE(abs(bh(50.0) - 1.0) < 0.001);
-    REQUIRE(abs(bh(10.0) - 0.707) < 0.001);
-  }
-  SECTION("filter mutiples")
-  {
-    ButterWorthLP bl2{100.0};
-    auto bl3 = bl * bl2;
-    REQUIRE(abs(bl3(100.0) - 0.707*0.707) < 0.001);
-    REQUIRE(abs(bl3(50.0) - 1.0) < 0.001);
-    REQUIRE(abs(bl3(200.0)) < 0.001);
-
-    ButterWorthLP bl4{100.0};
-    auto bl5 = bl3 * bl4;
-    REQUIRE(abs(bl5(100.0) - 0.707*0.707*0.707) < 0.001);
-  }
-  SECTION("butterworth band pass")
-  {
-    auto bb = bh * bl;
-    REQUIRE(abs(bb(50.0) - 1.0) < 0.001);
-    REQUIRE(abs(bb(10.0) - 0.707) < 0.001);
-    REQUIRE(abs(bb(100.0) - 0.707) < 0.001);
-    REQUIRE(abs(bb(0.0)) < 0.001);
-    REQUIRE(abs(bb(200.0)) < 0.001);
-  }
-}
-
-TEST_CASE("gauss band pass")
-{
-  Gauss gs{10.0, 100.0};
-  REQUIRE(abs(gs(55.0) - 1.0) < 0.001);
-  REQUIRE(gs(10.0) == gs(100.0));
-  REQUIRE(abs(gs(10.0) - exp(-0.5)) < 0.001);
-}
-
 TEST_CASE("macros")
 {
   int some_var = 42;
