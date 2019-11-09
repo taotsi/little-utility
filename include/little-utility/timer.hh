@@ -25,26 +25,25 @@ public:
         return(start_.time_since_epoch() !=
             std::chrono::high_resolution_clock::duration(0));
     }
-    void tStart(const char* file, int line, const char* func){
+    void tStart(const char* file, int line){
         if(!is_silent()){
             if(!is_plain_text()){
                 std::stringstream ss;
                 ss << "\033[0;44mTimer(" << id_ << ")\033[0m" << " started, "
-                    << file << "(" << line << "), " << func << "\n";
+                    << file << "(" << line << ")\n";
                 std::cout << ss.str();
             }
         }
         start_ = std::chrono::high_resolution_clock::now();
     }
-    unsigned long long tPutNow(const char* file, int line, const char* func){
+    unsigned long long tPutNow(const char* file, int line){
         auto t = GetUs();
         if(!is_silent()){
             std::stringstream ss;
             ss.imbue(std::locale(""));
             if(!is_plain_text()){
                 ss << "\033[0;44mTimer(" << id_ << ")\033[0m" << " ended,   "
-                    << file << "(" << line << "), " << func << "\n"
-                    << "> " << t << " us passed\n";
+                   << file << "(" << line << "): \033[1;33m" << t << "\033[0m us passed\n";
                 std::cout << ss.str();
             }else{
                 ss << t << "\n";
@@ -97,7 +96,7 @@ private:
         return is_silent_;
     }
 };
-#define tStart() tStart(__FILENAME__, __LINE__, __FUNCTION__)
-#define tPutNow() tPutNow(__FILENAME__, __LINE__, __FUNCTION__)
+#define tStart() tStart(__FILENAME__, __LINE__)
+#define tPutNow() tPutNow(__FILENAME__, __LINE__)
 
 } // namespace droneworld

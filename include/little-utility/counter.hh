@@ -22,17 +22,17 @@ public:
   {
     ShowCounts();
   }
-  void HereOnce(const char* file, int line)
+  void HereOnce(const char* file, int line, unsigned long long delta=1)
   {
     std::stringstream ss;
     ss << file << "(" << line << ")";
     if(counters_.find(ss.str()) != counters_.end())
     {
-      counters_[ss.str()] ++;
+      counters_[ss.str()] += delta;
     }
     else
     {
-      counters_[ss.str()] = 1;
+      counters_[ss.str()] = delta;
     }
   }
   void ShowCounts()
@@ -42,7 +42,7 @@ public:
     ss << "\033[0;44mCOUNTER:\033[0m\n";
     for(auto &it : counters_)
     {
-      ss << "  " << it.first << ":\t" << it.second << " times\n";
+      ss << "  " << it.first << ":  " << it.second << "\n";
     }
     std::cout << ss.str();
   }
@@ -53,8 +53,9 @@ private:
 };
 
 
-#define COUNT_HERE() Counter::instance().HereOnce(__FILENAME__, __LINE__)
-#define SHOW_COUNTS() Counter::instance().ShowCounts()
+#define tCountOnce() Counter::instance().HereOnce(__FILENAME__, __LINE__)
+#define tCount(d) Counter::instance().HereOnce(__FILENAME__, __LINE__, d)
+#define tShowCounts() Counter::instance().ShowCounts()
 }
 
 #endif // COUNTER_HH
